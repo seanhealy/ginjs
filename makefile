@@ -15,10 +15,10 @@ all:
 	@echo "Compiling Coffee..."
 	@coffee -c $(RELEASE_DIR)/$(RELEASE_FILE).coffee
 	
-	@echo "Linking Newest Build..."
-	@if [ -h $(RELEASE_DIR)/gin.js ]; then rm $(RELEASE_DIR)/gin.js; fi
+	@echo "Copying Newest Build to $(RELEASE_DIR)/gin.js..."
+	@if [ -f $(RELEASE_DIR)/gin.js ]; then rm $(RELEASE_DIR)/gin.js; fi
 	@cd $(RELEASE_DIR); \
-	ln -s $(RELEASE_FILE).js gin.js
+	cp $(RELEASE_FILE).js gin.js
 	
 	@echo "Great Success!"
 
