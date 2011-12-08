@@ -1,2 +1,3 @@
 # Interm Compiled Files
-bin/*
+bin/*.js
+bin/*.coffee
