@@ -1,6 +1,6 @@
 PACKAGE      = ginjs
-VERSION      = ` date "+%Y.%m%d%" `
-RELEASE_DIR  = bin/
+VERSION      = ` date "+%Y.%m.%d" `
+RELEASE_DIR  = bin
 RELEASE_FILE = $(PACKAGE)-$(VERSION)
 
 # Notice that the variable LOGNAME comes from the environment in
@@ -8,25 +8,18 @@ RELEASE_FILE = $(PACKAGE)-$(VERSION)
 #
 # target: all - Default target. Does nothing.
 all:
-	echo "Hello $(LOGNAME), nothing to do by default"
-	# very rarely: echo "Hello ${LOGNAME}, nothing to do by default"
-	echo "Try 'make help'"
+	@echo "Building a combined file..."
+	@if [ ! -d $(RELEASE_DIR) ]; then mkdir $(RELEASE_DIR); fi
+	@cat src/* > $(RELEASE_DIR)/$(RELEASE_FILE).coffee
+	
+	@echo "Compiling Coffee..."
+	@coffee -c $(RELEASE_DIR)/$(RELEASE_FILE).coffee
+	
+	@echo "Great Success!"
 
 # target: help - Display callable targets.
 help:
 	egrep "^# target:" [Mm]akefile
 
-# target: list - List source files
-list:
-	# Won't work. Each command is in separate shell
-	cd src
-	ls
-
-	# Correct, continuation of the same shell
-	cd src; \
-	ls
-
-# target: dist - Make a release.
-dist:
-	tar -cf  $(RELEASE_DIR)/$(RELEASE_FILE) && \
-	gzip -9  $(RELEASE_DIR)/$(RELEASE_FILE).tar
+clean:
+	rm $(RELEASE_DIR)/*
