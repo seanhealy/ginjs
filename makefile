@@ -22,6 +22,14 @@ all:
 	
 	@echo "Great Success!"
 
+routes:
+	@echo "Building a combined file..."
+	@if [ ! -d $(RELEASE_DIR) ]; then mkdir $(RELEASE_DIR); fi
+	@cat src/_init.coffee src/Route.coffee src/RouteManager.coffee > $(RELEASE_DIR)/routes.coffee
+	
+	@echo "Compiling Coffee..."
+	@coffee -c $(RELEASE_DIR)/routes.coffee
+
 # target: help - Display callable targets.
 help:
 	egrep "^# target:" [Mm]akefile
