@@ -1,0 +1,19 @@
+#! /usr/bin/ruby
+
+require 'rubygems'
+require 'rb-fsevent'
+require 'growl'
+require 'readline'
+
+include Growl
+
+# start the event watching
+fsevent = FSEvent.new
+fsevent.watch Dir.pwd + '/src' do |directories|
+	result = `make`
+	
+	notify_ok 'Rebuilding gin.js...' + "\n" + result
+end
+
+fsevent.run
+
