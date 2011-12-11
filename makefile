@@ -10,7 +10,7 @@ RELEASE_FILE = $(PACKAGE)-$(VERSION)
 all:
 	@echo "Building a combined file..."
 	@if [ ! -d $(RELEASE_DIR) ]; then mkdir $(RELEASE_DIR); fi
-	@cat src/* > $(RELEASE_DIR)/$(RELEASE_FILE).coffee
+	@-cat src/routes/* src/* > $(RELEASE_DIR)/$(RELEASE_FILE).coffee 2> /dev/null
 	
 	@echo "Compiling Coffee..."
 	@coffee -c $(RELEASE_DIR)/$(RELEASE_FILE).coffee
@@ -25,7 +25,7 @@ all:
 routes:
 	@echo "Building a combined file..."
 	@if [ ! -d $(RELEASE_DIR) ]; then mkdir $(RELEASE_DIR); fi
-	@cat src/_init.coffee src/Route.coffee src/RouteManager.coffee > $(RELEASE_DIR)/routes.coffee
+	@cat src/_init.coffee src/routes/* > $(RELEASE_DIR)/routes.coffee
 	
 	@echo "Compiling Coffee..."
 	@coffee -c $(RELEASE_DIR)/routes.coffee
