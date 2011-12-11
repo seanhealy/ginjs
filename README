@@ -1,3 +1,11 @@
-Just run make
+# Getting Started
 
-then grab or link to bin/gin.js
+Just run
+```
+make
+```
+
+then grab or link to 
+```
+bin/gin.js
+```
